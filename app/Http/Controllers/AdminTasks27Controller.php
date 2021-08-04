@@ -4,8 +4,10 @@
 	use Request;
 	use DB;
 	use CRUDBooster;
+	use App\Traits\Notification; 
 
 	class AdminTasks27Controller extends \crocodicstudio\crudbooster\controllers\CBController {
+		use Notification; 
 
 	    public function cbInit() {
 
@@ -31,6 +33,8 @@
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
 			$this->col[] = ["label"=>"مرسلة عبر","name"=>"from","join"=>"cms_users,name"];
+			$this->col[] = ["label"=>"مرسلة الى","name"=>"to","join"=>"cms_users,name"];
+
 			$this->col[] = ["label"=>"المهمة","name"=>"title"];
 			$this->col[] = ["label"=>"موعد التسليم","name"=>"deadline"];
 			$this->col[] = ["label"=>"تم الانجاز","name"=>"done"];
@@ -340,9 +344,16 @@
 	    //By the way, you can still create your own method in here... :) 
 		public function getSetDone($done,$id) {
 			DB::table('tasks')->where('id',$id)->update(['done'=>$done]);
-			
+			$from = DB::table('tasks')->where('id',$id)->value('from'); 
 			//This will redirect back and gives a message
+			$this->send_done_to_manager($from); 
+
 			CRUDBooster::redirect($_SERVER['HTTP_REFERER'],"تم تنفيذ المهمة 👍 ","info");
+		//	$this->send_done_to_manager($from); 
+
+		//	send_done_to_manager
+
+
 		 }
 
 	}

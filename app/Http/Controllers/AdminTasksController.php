@@ -75,9 +75,9 @@
 	        | 
 	        */
 	        $this->sub_module = array();
-			$this->sub_module[] = ['label'=>'ملاحظات و استفسارات','path'=>'notes',
-			'parent_columns'=>'name','foreign_key'=>'tasks_id','button_color'=>'success',
-			'button_icon'=>'fa fa-sticky-note-o'];
+		//	$this->sub_module[] = ['label'=>'ملاحظات و استفسارات','path'=>'notes',
+		//	'parent_columns'=>'name','foreign_key'=>'tasks_id','button_color'=>'success',
+		//	'button_icon'=>'fa fa-sticky-note-o'];
 
 
 	        /* 
@@ -363,8 +363,10 @@
 
 		 public function getSetApproved($approved,$id) {
 			DB::table('tasks')->where('id',$id)->update(['approved'=>$approved ]);
-			
+			$to = Task::find($id)->to; 
+		
 			//This will redirect back and gives a message
+			$this->validate_finish_task($to); 
 			CRUDBooster::redirect($_SERVER['HTTP_REFERER'],"تم تاكيد  التنفيذ 👍 ","info");
 		 }
 		 

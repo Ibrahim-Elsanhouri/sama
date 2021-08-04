@@ -19,6 +19,16 @@ CRUDBooster::sendNotification($config);
         $config['id_cms_users'] = [$id]; //This is an array of id users
         CRUDBooster::sendNotification($config);
             }
+
+
+    public function validate_finish_task($id){
+        $config['content'] = "تم تأكيد انهاء المهمة من خلال الادارة 🎁";
+        $config['to'] = CRUDBooster::adminPath('tasks');
+        $config['id_cms_users'] = [$id]; //This is an array of id users
+        CRUDBooster::sendNotification($config);
+
+
+    }        
             
 
 }
