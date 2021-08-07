@@ -46,7 +46,7 @@
 			$this->form[] = ['label'=>'نوع المشروع','name'=>'types_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'types,name'];
 			$this->form[] = ['label'=>'المبلغ','name'=>'price','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'الدفعات','name'=>'payment','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'رقم المعاملة','name'=>'process_number','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'رقم المعاملة','name'=>'process_number','type'=>'text','validation'=>'min:1|max:255','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'العميل','name'=>'users_id','type'=>'select2','validation'=>'required','width'=>'col-sm-9','datatable'=>'users,name'];
 			# END FORM DO NOT REMOVE THIS LINE
 

@@ -45,8 +45,8 @@
 			$this->form = [];
 			$this->form[] = ['label'=>'الشخص المنفذ','name'=>'to','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'cms_users,name'];
 			$this->form[] = ['label'=>'المشروع','name'=>'projects_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'projects,name'];
-			$this->form[] = ['label'=>'المهمة','name'=>'title','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'التفاصيل','name'=>'description','type'=>'wysiwyg','validation'=>'required|string|min:5|max:5000','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'المهمة','name'=>'works_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'works,name'];
+			//$this->form[] = ['label'=>'التفاصيل','name'=>'description','type'=>'textarea','validation'=>'required|string|min:5|max:5000','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'موعد التسليم','name'=>'deadline','type'=>'date','validation'=>'required|date','width'=>'col-sm-10'];
 			# END FORM DO NOT REMOVE THIS LINE
 
