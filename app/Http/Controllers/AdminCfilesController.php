@@ -4,16 +4,13 @@
 	use Request;
 	use DB;
 	use CRUDBooster;
-	use App\Models\Task; 
-	use App\Traits\Notification; 
 
-	class AdminTasksController extends \crocodicstudio\crudbooster\controllers\CBController {
-		use Notification; 
+	class AdminCfilesController extends \crocodicstudio\crudbooster\controllers\CBController {
 
 	    public function cbInit() {
 
 			# START CONFIGURATION DO NOT REMOVE THIS LINE
-			$this->title_field = "title";
+			$this->title_field = "name";
 			$this->limit = "20";
 			$this->orderby = "id,desc";
 			$this->global_privilege = false;
@@ -28,39 +25,29 @@
 			$this->button_filter = true;
 			$this->button_import = false;
 			$this->button_export = false;
-			$this->table = "tasks";
+			$this->table = "cfiles";
 			# END CONFIGURATION DO NOT REMOVE THIS LINE
 
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
-			$this->col[] = ["label"=>"مرسلة عبر","name"=>"from","join"=>"cms_users,name"];
-			$this->col[] = ["label"=>"مرسلة الى","name"=>"to","join"=>"cms_users,name"];
-			$this->col[] = ["label"=>"المهمة","name"=>"works_is","join"=>"works,name"];
-		//	$this->col[] = ["label"=>"موعد التسليم","name"=>"deadline"];
-			$this->col[] = ["label"=>"تم الانجاز","name"=>"done"];
-			$this->col[] = ["label"=>"تم التأكيد","name"=>"approved"];
+			$this->col[] = ["label"=>"المرفق","name"=>"name"];
+			$this->col[] = ["label"=>"الملف","name"=>"file"];
+			$this->col[] = ["label"=>"المسجل","name"=>"cms_users_id","join"=>"cms_users,name"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
-			$this->form[] = ['label'=>'الشخص المنفذ','name'=>'to','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'cms_users,name'];
-			$this->form[] = ['label'=>'المشروع','name'=>'projects_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'projects,name'];
-			$this->form[] = ['label'=>'المهمة','name'=>'works_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'works,name'];
-			//$this->form[] = ['label'=>'التفاصيل','name'=>'description','type'=>'textarea','validation'=>'required|string|min:5|max:5000','width'=>'col-sm-10'];
-	//		$this->form[] = ['label'=>'موعد التسليم','name'=>'deadline','type'=>'date','validation'=>'required|date','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'المرفق','name'=>'name','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'الملف','name'=>'file','type'=>'upload','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Users Id','name'=>'users_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
 			//$this->form = [];
-			//$this->form[] = ['label'=>'الشخص المنفذ','name'=>'to','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'cms_users,name'];
-			//$this->form[] = ['label'=>'المشروع','name'=>'projects_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'projects,name'];
-			//
-			//$this->form[] = ['label'=>'المهمة','name'=>'title','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'التفاصيل','name'=>'description','type'=>'wysiwyg','validation'=>'required|string|min:5|max:5000','width'=>'col-sm-10','placeholder'=>'فضلا ادخل احرف فقط'];
-			//$this->form[] = ['label'=>'موعد التسليم','name'=>'deadline','type'=>'date','validation'=>'required|date','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'المرفق','name'=>'name','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10','datatable'=>'cms_users,name'];
+			//$this->form[] = ['label'=>'الملف','name'=>'file','type'=>'upload','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Users Id','name'=>'users_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','placeholder'=>'فضلا ادخل احرف فقط'];
 			# OLD END FORM
-
-			
 
 			/* 
 	        | ---------------------------------------------------------------------- 
@@ -75,9 +62,6 @@
 	        | 
 	        */
 	        $this->sub_module = array();
-		//	$this->sub_module[] = ['label'=>'ملاحظات و استفسارات','path'=>'notes',
-		//	'parent_columns'=>'name','foreign_key'=>'tasks_id','button_color'=>'success',
-		//	'button_icon'=>'fa fa-sticky-note-o'];
 
 
 	        /* 
@@ -92,11 +76,8 @@
 	        | 
 	        */
 	        $this->addaction = array();
-			$this->addaction[] = ['label'=>'تأكيد التنفيذ','url'=>CRUDBooster::mainpath('set-done/1/[id]'),'icon'=>'fa fa-cloud-download','color'=>'primary','showIf'=>"[done] == '0'"];
-			$this->addaction[] = ['label'=>'تم التنفيذ','url'=>CRUDBooster::mainpath('set-done/1/[id]'),'icon'=>'fa fa-thumbs-up','color'=>'success','showIf'=>"[done] == '1'"];
 
-			$this->addaction[] = ['label'=>'انهاء المهمة','url'=>CRUDBooster::mainpath('set-approved/1/[id]'),'icon'=>'fa fa-check','color'=>'primary','showIf'=>"[approved] == '0'"];
-			$this->addaction[] = ['label'=>'تم الانهاء','url'=>CRUDBooster::mainpath('set-approved/1/[id]'),'icon'=>'fa fa-check-square-o','color'=>'success','showIf'=>"[approved] == '1'"];
+
 	        /* 
 	        | ---------------------------------------------------------------------- 
 	        | Add More Button Selected
@@ -144,7 +125,6 @@
 	        | 
 	        */
 	        $this->table_row_color = array();     	          
-	
 
 	        
 	        /*
@@ -276,9 +256,7 @@
 	    */
 	    public function hook_before_add(&$postdata) {        
 	        //Your code here
-			$postdata['from'] = CRUDBooster::myId();
-
-
+			$postdata['cms_users_id'] = CRUDBooster::myId();
 	    }
 
 	    /* 
@@ -290,13 +268,6 @@
 	    */
 	    public function hook_after_add($id) {        
 	        //Your code here
-			$project = Task::find($id)->project; 
-
-		 if ($project->tasks->count() == 1){
-			 $project->halas_id = 2; 
-			 $project->save(); 
-		 }; 
-
 
 	    }
 
@@ -352,24 +323,6 @@
 
 
 	    //By the way, you can still create your own method in here... :) 
-
-		public function getSetDone($done,$id) {
-			DB::table('tasks')->where('id',$id)->update(['done'=>$done]);
-			
-			//This will redirect back and gives a message
-			CRUDBooster::redirect($_SERVER['HTTP_REFERER'],"تم تنفيذ المهمة 👍 ","info");
-		 }
-
-
-		 public function getSetApproved($approved,$id) {
-			DB::table('tasks')->where('id',$id)->update(['approved'=>$approved ]);
-			$to = Task::find($id)->to; 
-		
-			//This will redirect back and gives a message
-			$this->validate_finish_task($to); 
-			CRUDBooster::redirect($_SERVER['HTTP_REFERER'],"تم تاكيد  التنفيذ 👍 ","info");
-		 }
-		 
 
 
 	}

@@ -50,6 +50,9 @@
          <div class="col-lg-12 col-md-12 col-sm-12">
              <hr />
              <span>
+                <strong>رقم الفاتورة  : </strong>  {{ $payment->id }}  
+            </span>
+             <span>
                  <strong> س . ت : </strong>  4030247934
              </span>
              <span>
@@ -58,6 +61,7 @@
               <span>
                  <strong>راس المال : </strong>  25000 ريال  
              </span>
+          
              <hr />
          </div>
      </div>
@@ -99,12 +103,12 @@
                                 <tr>
                                     <td>1</td>
                                     <td>
-                                        {{ $payment->amount / 1.15 }}
+                                        {{ round($payment->amount / 1.15  , 2)}}
 
                                     </td>
 
-                                    <td>{{  $payment->amount -   $payment->amount / 1.15  }}</td>
-                                    <td>{{ $payment->amount }}</td>
+                                    <td>{{ round($payment->amount -   $payment->amount / 1.15 , 2)   }}</td>
+                                    <td>{{ round($payment->amount , 2)  }}</td>
                                 </tr>
                              
                          
@@ -116,28 +120,43 @@
              
              <hr />
               <div class="ttl-amts">
-                  <h5> ضريبة القيمة المضافة :          {{  $payment->amount -   $payment->amount / 1.15  }}
+                  <h5> ضريبة القيمة المضافة :          {{ round( $payment->amount -   $payment->amount / 1.15 , 2)  }}
                 </h5>
              </div>
              <hr />
               <div class="ttl-amts">
-                  <h4> <strong>المجموع :{{ $payment->amount }} ريال سعودي </strong> </h4>
+                  <h4> <strong>المجموع :{{ round($payment->amount  , 2)}} ريال سعودي </strong> </h4>
              </div>
          </div>
      </div>
       <div class="row">
-         <div class="col-lg-12 col-md-12 col-sm-12">
+          
+<div class="col-lg-6 col-md-6 col-sm-6"  >
+    {!! DNS2D::getBarcodeHTML( $payment->id , 'QRCODE') !!}
+
+</div>
+
+         <div class="col-lg-6 col-md-6 col-sm-6">
             <strong> نقاط مهمة</strong>
              <ul>
                   <li>
 تعتبر هذه فاتورة الكترونية مثبته من سما للاستشارات الهندسية
                  </li>
+       
+
           <!--       <li>
                      Please read all terms and polices on  www.yourdomaon.com for returns, replacement and other issues.
 
                  </li> -->
              </ul>
              </div>
+
+
+
+
+
+
+           
          </div>
       <div class="row pad-top-botm">
          <div class="col-lg-12 col-md-12 col-sm-12">

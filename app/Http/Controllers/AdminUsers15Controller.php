@@ -69,9 +69,12 @@
 	        | 
 	        */
 	        $this->sub_module = array();
-			$this->sub_module[] = ['label'=>'مشاريع العميل','path'=>'projects','parent_columns'=>'name',
+			$this->sub_module[] = ['label'=>'المشاريع','path'=>'projects','parent_columns'=>'name',
 			'foreign_key'=>'users_id','button_color'=>'success','button_icon'=>'fa fa-building'];
-
+			$this->sub_module[] = ['label'=>'الملاحظات','path'=>'cnotes','parent_columns'=>'name',
+			'foreign_key'=>'users_id','button_color'=>'info','button_icon'=>'fa fa-sticky-note-o'];
+		//	$this->sub_module[] = ['label'=>'المرفقات','path'=>'cfiles','parent_columns'=>'name',
+		//	'foreign_key'=>'users_id','button_color'=>'primary','button_icon'=>'fa fa-file'];
 	        /* 
 	        | ---------------------------------------------------------------------- 
 	        | Add More Action Button / Menu

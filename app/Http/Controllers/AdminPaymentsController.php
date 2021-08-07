@@ -11,8 +11,6 @@
 
 	    public function cbInit() {
 
-
-
 			# START CONFIGURATION DO NOT REMOVE THIS LINE
 			$this->title_field = "id";
 			$this->limit = "20";
@@ -39,25 +37,30 @@
 			$this->col[] = ["label"=>"تاريخ الدفعه","name"=>"payment_date"];
 			$this->col[] = ["label"=>"المشروع","name"=>"projects_id","join"=>"projects,name"];
 			$this->col[] = ["label"=>"الايصال","name"=>"file"];
-
+			$this->col[] = ["label"=>"مسجل الدفعة","name"=>"cms_users_id","join"=>"cms_users,name"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
 			$this->form[] = ['label'=>'قيمة الدفعة','name'=>'amount','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'نوع السداد','name'=>'type','type'=>'select','width'=>'col-sm-9','dataenum'=>'نقدي;حوالة بنكية'];
+
 			$this->form[] = ['label'=>'البنك','name'=>'banks_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'banks,name'];
 			$this->form[] = ['label'=>'تاريخ الدفعة','name'=>'payment_date','type'=>'date','validation'=>'required|date','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'المشروع','name'=>'projects_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'projects,name'];
-			$this->form[] = ['label'=>'الايصال','name'=>'file','type'=>'upload'];
-
+			$this->form[] = ['label'=>'الايصال','name'=>'file','type'=>'upload','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'مرجع السداد','name'=>'ref','type'=>'text','width'=>'col-sm-9'];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
 			//$this->form = [];
-			//$this->form[] = ['label'=>'قيمة الدفعة','name'=>'amount','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'banks,name'];
-			//$this->form[] = ['label'=>'البنك','name'=>'banks_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'قيمة الدفعة','name'=>'amount','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'البنك','name'=>'banks_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'banks,name'];
 			//$this->form[] = ['label'=>'تاريخ الدفعة','name'=>'payment_date','type'=>'date','validation'=>'required|date','width'=>'col-sm-10'];
 			//$this->form[] = ['label'=>'المشروع','name'=>'projects_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'projects,name'];
+			//$this->form[] = ['label'=>'الايصال','name'=>'file','type'=>'upload','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Type','name'=>'type','type'=>'select','width'=>'col-sm-9','dataenum'=>'نقدي,حوالة بنكية'];
+			//$this->form[] = ['label'=>'Ref','name'=>'ref','type'=>'text','width'=>'col-sm-9'];
 			# OLD END FORM
 
 			/* 
@@ -275,6 +278,8 @@
 			$user = Project::find($postdata['projects_id'])->user->id;
 		//	dd($user); 
 			$postdata['users_id'] = $user;
+			$postdata['cms_users_id'] = CRUDBooster::myId();
+
 
 	    }
 
