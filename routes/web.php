@@ -2,6 +2,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,7 @@ Route::get('/', function () {
 });
 Route::get('/invoice/{id}',[PaymentController::class, 'show'])->name('invoice');
 Route::get('/user/statement/{id}',[UserController::class, 'statement'])->name('user.statement');
+Route::get('/report',[ReportController::class, 'report'])->name('report');
 
 Auth::routes();
 

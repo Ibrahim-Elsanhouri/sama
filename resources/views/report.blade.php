@@ -40,23 +40,20 @@
          
          
               <span>
-                 <strong>كشف حساب عميل</strong>  
+                 <strong>تقرير المبيعات و التحصيل</strong>  
              </span>
              <hr />
          </div>
      </div>
      <div  class="row  client-info">
          <div class="col-lg-12 col-md-12 col-sm-12">
-         <h4>  <strong>معلومات العميل </strong></h4>
-           <strong>  {{ $user->name }}</strong>
+         <h4>  <strong> عدد المشاريع </strong></h4>
+           <strong>  {{ $projects->count() }}</strong>
   
               <br />
       
-             <b>الجوال :</b>  {{ $user->mobile }}
-              <br />
-             <b>البريد الالكتروني :</b> {{ $user->email }}
-             <br />
-             <b> عدد المشاريع :</b> {{ $user->projects->count() }}
+             <b>ضريبة القيمة المضافة :</b>  {{ $projects->sum('price') * 0.15 }}
+          
          </div>
          
      </div>
@@ -73,22 +70,24 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($user->projects  as $project)
+                                @foreach ($projects as $project)
                                 <tr>
-                                    <td>{{ $project->name}}</td>
+                                    <td>{{$project->name}}</td>
                                     <td>
-                                        {{ $project->price}}
+                                        {{$project->price}}
 
                                     </td>
 
                                     <td>                
-                                                          {{  $project->payments->sum('amount') }}    
+                                                          {{$project->payments->sum('amount') }}    
                                     </td>
                                     <td>                      
-                                                     {{   $project->price - $project->payments->sum('amount')  }}
+                                                     {{ $project->price - $project->payments->sum('amount')  }}
                                     </td>
-                                </tr> 
+                                </tr>     
                                 @endforeach
+                           
+                              
                               
                              
                          
@@ -97,15 +96,60 @@
                         </table>
                </div>
              <hr />
+             <div class="table-responsive">
+                <table class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th colspan="4">
+                    <div class="text-center">    
+                        التحصيل و الدفعات المسددة
+                    </div>
+                    </th>
+                </tr>
+                <tr>
+                    <th>المشروع</th>
+                    <th>قيمة الدفعة </th>
+                    <th>العميل</th>
+                </tr>
+          
+            </thead>
+            <tbody>
+                @foreach ($payments as $payment)
+                <tr>
+                    <td>{{$payment->project->name}}</td>
+                    <td>{{$payment->amount }}</td>
+
+                    <td>
+                        {{$payment->user->name}}
+
+                    </td>
+
+                  
+                </tr>     
+                @endforeach
+           
+                <tr>
+                    <td>التحصيل : {{ $payments->sum('amount') - $payments->sum('amount') * 0.15 }} </td>                    
+                    <td> ضريبة القيمة المضافة :{{ $payments->sum('amount') * 0.15 }} </td>
+                    <td> الاجمالي :  {{ $payments->sum('amount')}} </td>
+
+                </tr>
+              
+              
              
+         
+                
+            </tbody>
+        </table>
+</div>
              <hr />
               <div class="ttl-amts">
                
              </div>
              <hr />
               <div class="ttl-amts">
-                  <h4> <strong>صافي الحساب :  {{ $user->projects->sum('price') -  $user->payments->sum('amount')  }} ريال سعودي </strong> </h4>
-             </div>
+         <!--         <h4> <strong>صافي الحساب :  user->projects->sum('price') -  $user->payments->sum('amount')  }} ريال سعودي </strong> </h4>
+         --> </div>
          </div>
      </div>
       <div class="row">
