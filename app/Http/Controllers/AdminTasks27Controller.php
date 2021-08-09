@@ -35,7 +35,7 @@
 			$this->col[] = ["label"=>"مرسلة عبر","name"=>"from","join"=>"cms_users,name"];
 			$this->col[] = ["label"=>"مرسلة الى","name"=>"to","join"=>"cms_users,name"];
 
-			$this->col[] = ["label"=>"مرسلة عبر","name"=>"works_is","join"=>"works,name"];
+			$this->col[] = ["label"=>"مرسلة عبر","name"=>"works_id","join"=>"works,name"];
 		//	$this->col[] = ["label"=>"موعد التسليم","name"=>"deadline"];
 			$this->col[] = ["label"=>"تم الانجاز","name"=>"done"];
 			$this->col[] = ["label"=>"تم التأكيد","name"=>"approved"];
