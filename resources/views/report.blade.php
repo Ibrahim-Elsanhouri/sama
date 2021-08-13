@@ -108,8 +108,9 @@
                 </tr>
                 <tr>
                     <th>المشروع</th>
-                    <th>قيمة الدفعة </th>
                     <th>العميل</th>
+
+                    <th>قيمة الدفعة </th>
                 </tr>
           
             </thead>
@@ -117,19 +118,19 @@
                 @foreach ($payments as $payment)
                 <tr>
                     <td>{{$payment->project->name}}</td>
-                    <td>{{$payment->amount }}</td>
 
                     <td>
                         {{$payment->user->name}}
 
                     </td>
+                    <td>{{$payment->amount }}</td>
 
                   
                 </tr>     
                 @endforeach
            
                 <tr>
-                    <td>التحصيل : {{ $payments->sum('amount') - $payments->sum('amount') * 0.15 }} </td>                    
+                    <td>المبلغ المحصل : {{ $payments->sum('amount') - $payments->sum('amount') * 0.15 }} </td>                    
                     <td> ضريبة القيمة المضافة :{{ $payments->sum('amount') * 0.15 }} </td>
                     <td> الاجمالي :  {{ $payments->sum('amount')}} </td>
 
