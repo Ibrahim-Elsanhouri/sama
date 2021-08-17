@@ -47,12 +47,10 @@
      </div>
      <div  class="row  client-info">
          <div class="col-lg-12 col-md-12 col-sm-12">
-         <h4>  <strong> عدد المشاريع </strong></h4>
-           <strong>  {{ $projects->count() }}</strong>
+         <h4>  <strong> عدد المشاريع : {{ $projects->count() }} </strong></h4>
   
               <br />
-      
-             <b>ضريبة القيمة المضافة :</b>  {{ $projects->sum('price') * 0.15 }}
+        
           
          </div>
          
@@ -71,7 +69,10 @@
                             </thead>
                             <tbody>
                                 @foreach ($projects as $project)
+                       
+
                                 <tr>
+                                    
                                     <td>{{$project->name}}</td>
                                     <td>
                                         {{$project->price}}
@@ -85,6 +86,18 @@
                                                      {{ $project->price - $project->payments->sum('amount')  }}
                                     </td>
                                 </tr>     
+                                <tr>
+                                    <td colspan="2">
+العميل : {{ $project->user->name }}
+                                    </td>
+                                    <td colspan="2">
+                                        الفرع :  {{ $project->user->office->name }} 
+
+                                    </td>
+
+
+
+                                </tr>
                                 @endforeach
                            
                               
@@ -108,7 +121,7 @@
                 </tr>
                 <tr>
                     <th>المشروع</th>
-                    <th>العميل</th>
+                 
 
                     <th>قيمة الدفعة </th>
                 </tr>
@@ -119,10 +132,7 @@
                 <tr>
                     <td>{{$payment->project->name}}</td>
 
-                    <td>
-                        {{$payment->user->name}}
-
-                    </td>
+             
                     <td>{{$payment->amount }}</td>
 
                   
@@ -130,13 +140,20 @@
                 @endforeach
            
                 <tr>
-                    <td>المبلغ المحصل : {{ $payments->sum('amount') - $payments->sum('amount') * 0.15 }} </td>                    
-                    <td> ضريبة القيمة المضافة :{{ $payments->sum('amount') * 0.15 }} </td>
-                    <td> الاجمالي :  {{ $payments->sum('amount')}} </td>
+                    <td colspan="0.5">المبلغ المحصل : {{ round($payments->sum('amount') / 1.15  , 2)}} </td>                    
+                    <td colspan="0.5"> ضريبة القيمة المضافة :{{ round($payments->sum('amount') - $payments->sum('amount') / 1.15 , 2) }} </td>
 
                 </tr>
-              
-              
+              <tr>
+                <td colspan="2">
+                    <div class="text-center">
+
+
+                       <b> الاجمالي :  {{ round($payments->sum('amount') , 2)}} ريال سعودي 
+                       </b>
+                    </div>
+                    </td>
+              </tr>
              
          
                 

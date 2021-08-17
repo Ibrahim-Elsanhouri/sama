@@ -80,7 +80,7 @@ $this->form[] = ['label'=>'مرفقات المشروع','name'=>'attachments','t
 
 
 $this->sub_module = array();
-$this->sub_module[] = ['label'=>'المهام','path'=>'tasks','parent_columns'=>'id','foreign_key'=>'projects_id','button_color'=>'info','button_icon'=>'fa fa-book'];
+$this->sub_module[] = ['label'=>'مهام المشروع','path'=>'tasks','parent_columns'=>'id','foreign_key'=>'projects_id','button_color'=>'info','button_icon'=>'fa fa-book'];
 $this->sub_module[] = ['label'=>'المدفوعات','path'=>'payments','parent_columns'=>'id,price','foreign_key'=>'projects_id','button_color'=>'primary','button_icon'=>'fa fa-money'];
 
 //send_done_to_manager
@@ -155,8 +155,10 @@ $this->sub_module[] = ['label'=>'المدفوعات','path'=>'payments','parent_
 	        |
 	        */
 	        $this->index_statistic = array();
-
-
+			$this->index_statistic[] = ['label'=>'اجمالي المشاريع','count'=>DB::table('projects')->count(),
+			'icon'=>'fa fa-building','color'=>'success'];
+			$this->index_statistic[] = ['label'=>'اجمالي المبلغ','count'=>DB::table('projects')->sum('price'),
+			'icon'=>'fa fa-money','color'=>'info'];
 
 	        /*
 	        | ---------------------------------------------------------------------- 

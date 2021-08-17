@@ -148,12 +148,26 @@
 	        | @label, @count, @icon, @color 
 	        |
 	        */
+			$amount = DB::table('projects')->
+			where('id' , $_GET['parent_id'])->
+			value('price'); 
+			$payments = DB::table('payments')->
+			where('projects_id' , $_GET['parent_id'])->
+			sum('amount');
+
+			$total = $amount - $payments; 
+
 			$this->index_statistic = array();
+			$this->index_statistic[] = ['label'=>'المبلغ المتفق عليه','count'=>DB::table('projects')->
+			where('id' , $_GET['parent_id'])->
+			value('price'),
+			'icon'=>'fa fa-thumbs-up','color'=>'info'];
 			$this->index_statistic[] = ['label'=>'التحصيل','count'=>DB::table('payments')->
 			where('projects_id' , $_GET['parent_id'])->
 			sum('amount'),
 			'icon'=>'fa fa-money','color'=>'success'];
-	
+		$this->index_statistic[] = ['label'=>'المتبقي','count'=>$total,
+			'icon'=>'fa fa-calculator','color'=>'danger'];
 
 
 	        /*
