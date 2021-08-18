@@ -42,7 +42,6 @@
 
 		//	$this->col[] = ["label"=>"موعد التسليم","name"=>"deadline"];
 		    $this->col[] = ["label"=>"تاريخ المهمة","name"=>"created_at"];
-		    $this->col[] = ["label"=>"تاريخ المهمة","name"=>"created_at" , "callback_php"=>'number_format([created_at])'];
 			//$this->col[] = ["label"=>"Total Favorite","name"=>"($current_timestamp) as total_favorite"];
 
 			$this->col[] = ["label"=>"تم الانجاز","name"=>"done"];
