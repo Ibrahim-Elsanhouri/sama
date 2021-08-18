@@ -32,10 +32,12 @@
 
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
-			$this->col[] = ["label"=>"مرسلة عبر","name"=>"from","join"=>"cms_users,name"];
+			$this->col[] = ["label"=>"مرسلة من","name"=>"from","join"=>"cms_users,name"];
 			$this->col[] = ["label"=>"مرسلة الى","name"=>"to","join"=>"cms_users,name"];
 
 			$this->col[] = ["label"=>"مرسلة عبر","name"=>"works_id","join"=>"works,name"];
+			$this->col[] = ["label"=>"تاريخ المهمة","name"=>"created_at"];
+
 		//	$this->col[] = ["label"=>"موعد التسليم","name"=>"deadline"];
 			$this->col[] = ["label"=>"تم الانجاز","name"=>"done"];
 			$this->col[] = ["label"=>"تم التأكيد","name"=>"approved"];

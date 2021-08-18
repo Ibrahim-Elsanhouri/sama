@@ -4,6 +4,7 @@
 	use Request;
 	use DB;
 	use CRUDBooster;
+	use Carbon\Carbon;
 	use App\Models\Task; 
 	use App\Traits\Notification; 
 
@@ -11,6 +12,8 @@
 		use Notification; 
 
 	    public function cbInit() {
+		//	$current_timestamp = Carbon::now(); 
+		//	dd($current_timestamp); 
 
 			# START CONFIGURATION DO NOT REMOVE THIS LINE
 			$this->title_field = "title";
@@ -33,10 +36,15 @@
 
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
-			$this->col[] = ["label"=>"مرسلة عبر","name"=>"from","join"=>"cms_users,name"];
+			$this->col[] = ["label"=>"مرسلة من","name"=>"from","join"=>"cms_users,name"];
 			$this->col[] = ["label"=>"مرسلة الى","name"=>"to","join"=>"cms_users,name"];
 			$this->col[] = ["label"=>"المهمة","name"=>"works_id","join"=>"works,name"];
+
 		//	$this->col[] = ["label"=>"موعد التسليم","name"=>"deadline"];
+		    $this->col[] = ["label"=>"تاريخ المهمة","name"=>"created_at"];
+		    $this->col[] = ["label"=>"تاريخ المهمة","name"=>"created_at" , "callback_php"=>'number_format([created_at])'];
+			//$this->col[] = ["label"=>"Total Favorite","name"=>"($current_timestamp) as total_favorite"];
+
 			$this->col[] = ["label"=>"تم الانجاز","name"=>"done"];
 			$this->col[] = ["label"=>"تم التأكيد","name"=>"approved"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
