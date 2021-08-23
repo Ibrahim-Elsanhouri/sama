@@ -32,6 +32,8 @@
 			$this->col = [];
 			$this->col[] = ["label"=>"الملاحظة","name"=>"title"];
 			$this->col[] = ["label"=>"صاحب الملاحظة","name"=>"cms_users_id","join"=>"cms_users,name"];
+			$this->col[] = ["label"=>"وقت الملاحظة","name"=>"created_at"];
+
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
@@ -233,7 +235,7 @@
 	    */
 	    public function hook_query_index(&$query) {
 	        //Your code here
-			$query->where('to',CRUDBooster::myId());
+		//	$query->where('to',CRUDBooster::myId());
 
 	    }
 

@@ -4,6 +4,7 @@
 	use Request;
 	use DB;
 	use CRUDBooster;
+	use App\Models\Task;
 	use App\Traits\Notification; 
 
 	class AdminTasks27Controller extends \crocodicstudio\crudbooster\controllers\CBController {
@@ -35,7 +36,7 @@
 			$this->col[] = ["label"=>"مرسلة من","name"=>"from","join"=>"cms_users,name"];
 			$this->col[] = ["label"=>"مرسلة الى","name"=>"to","join"=>"cms_users,name"];
 
-			$this->col[] = ["label"=>"مرسلة عبر","name"=>"works_id","join"=>"works,name"];
+			$this->col[] = ["label"=>"المهمة المطلوب انجازها","name"=>"works_id","join"=>"works,name"];
 			$this->col[] = ["label"=>"تاريخ المهمة","name"=>"created_at"];
 
 		//	$this->col[] = ["label"=>"موعد التسليم","name"=>"deadline"];
@@ -80,7 +81,9 @@
 	        | 
 	        */
 	        $this->sub_module = array();
-		
+			$this->sub_module[] = ['label'=>'ملاحظات و استفسارات','path'=>'notes',
+			'parent_columns'=>'name','foreign_key'=>'tasks_id','button_color'=>'success',
+			'button_icon'=>'fa fa-sticky-note-o'];
 
 	        /* 
 	        | ---------------------------------------------------------------------- 
@@ -255,6 +258,8 @@
 	    */
 	    public function hook_query_index(&$query) {
 	        //Your code here
+			$query->where('to',CRUDBooster::myId());
+
 	            
 	    }
 
@@ -351,11 +356,26 @@
 			$this->send_done_to_manager($from); 
 
 			CRUDBooster::redirect($_SERVER['HTTP_REFERER'],"تم تنفيذ المهمة 👍 ","info");
-		//	$this->send_done_to_manager($from); 
-
-		//	send_done_to_manager
-
+	
 
 		 }
+		 public function getIndex() {
+			//First, Add an auth
+			 if(!CRUDBooster::isView()) CRUDBooster::redirect(CRUDBooster::adminPath(),trans('crudbooster.denied_access'));
+			 
+			 //Create your own query 
+			 $data = [];
+			 $data['page_title'] = 'Products Data';
+		//	 $data['result'] = DB::table('products')->orderby('id','desc')->paginate(10);
+		$tasks = Task::where('to' , CRUDBooster::myId())->get();	  
+		//dd($tasks);
+			 //Create a view. Please use `view` method instead of view method from laravel.
+			// return $this->view('your_custom_view_index',$data);
+			return view('tasks.mytasks' , compact('tasks' , 'data'));
+		  }
+		  
+
+
+
 
 	}

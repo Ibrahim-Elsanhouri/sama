@@ -78,7 +78,8 @@
 	        | 
 	        */
 	        $this->sub_module = array();
-
+			$this->sub_module[] = ['label'=>'مهام المشروع','path'=>'tasks','parent_columns'=>'id','foreign_key'=>'projects_id','button_color'=>'info','button_icon'=>'fa fa-book'];
+			$this->sub_module[] = ['label'=>'المدفوعات','path'=>'payments','parent_columns'=>'id,price','foreign_key'=>'projects_id','button_color'=>'primary','button_icon'=>'fa fa-money'];
 
 	        /* 
 	        | ---------------------------------------------------------------------- 
@@ -336,7 +337,21 @@
 	        //Your code here
 
 	    }
-
+		public function getDetail($id) {
+			//Create an Auth
+			if(!CRUDBooster::isRead() && $this->global_privilege==FALSE || $this->button_edit==FALSE) {    
+			  CRUDBooster::redirect(CRUDBooster::adminPath(),trans("crudbooster.denied_access"));
+			}
+			
+		$data = [];
+			$data['page_title'] = 'Detail Data';
+	//	$data['row'] = DB::table('products')->where('id',$id)->first();
+    $project = Project::find($id); 
+			
+			//Please use view method instead view method from laravel
+	//		return $this->view('custom_detail_view',$data);
+	return view('projects.detail' , compact('data', 'project'));
+		  }
 
 
 	    //By the way, you can still create your own method in here... :) 

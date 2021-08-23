@@ -22,4 +22,12 @@ class Project extends Model
         return $this->belongsTo(User::class, 'users_id'); 
 
     }
+    public function type(){
+        return $this->belongsTo(Type::class, 'users_id'); 
+
+    }
+    public function hala(){
+        return $this->belongsTo(Hala::class, 'users_id'); 
+
+    }
 }

@@ -2,6 +2,7 @@
 
 	use Session;
 	use Request;
+	use App\Models\Project; 
 	use DB;
 	use CRUDBooster;
 
@@ -44,7 +45,7 @@
 			$this->form = [];
 			$this->form[] = ['label'=>'اسم المشروع','name'=>'name','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10','placeholder'=>'فضلا ادخل احرف فقط'];
 			$this->form[] = ['label'=>'نوع المشروع','name'=>'types_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'types,name'];
-			$this->form[] = ['label'=>'العنوان','name'=>'address','type'=>'text','validation'=>'string|min:3|max:70','width'=>'col-sm-10','placeholder'=>'فضلا ادخل احرف فقط'];
+			$this->form[] = ['label'=>'موقع المشروع','name'=>'address','type'=>'text','validation'=>'string|min:3|max:70','width'=>'col-sm-10','placeholder'=>'فضلا ادخل احرف فقط'];
 
 			$this->form[] = ['label'=>'المبلغ','name'=>'price','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'الدفعات','name'=>'payment','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
@@ -352,5 +353,19 @@ $this->sub_module[] = ['label'=>'المدفوعات','path'=>'payments','parent_
 
 	    //By the way, you can still create your own method in here... :) 
 
-
+		public function getDetail($id) {
+			//Create an Auth
+			if(!CRUDBooster::isRead() && $this->global_privilege==FALSE || $this->button_edit==FALSE) {    
+			  CRUDBooster::redirect(CRUDBooster::adminPath(),trans("crudbooster.denied_access"));
+			}
+			
+		$data = [];
+			$data['page_title'] = 'Detail Data';
+	//	$data['row'] = DB::table('products')->where('id',$id)->first();
+    $project = Project::find($id); 
+			
+			//Please use view method instead view method from laravel
+	//		return $this->view('custom_detail_view',$data);
+	return view('projects.detail' , compact('data', 'project'));
+		  }
 	}

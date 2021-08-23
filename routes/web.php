@@ -3,6 +3,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\TaskController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,7 @@ Route::get('/', function () {
 Route::get('/invoice/{id}',[PaymentController::class, 'show'])->name('invoice');
 Route::get('/user/statement/{id}',[UserController::class, 'statement'])->name('user.statement');
 Route::get('/report',[ReportController::class, 'report'])->name('report');
+Route::get('/task/{id}/done',[TaskController::class, 'done'])->name('task.done');
 
 Auth::routes();
 

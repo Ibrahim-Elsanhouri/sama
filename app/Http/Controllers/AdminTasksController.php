@@ -82,9 +82,9 @@
 	        | 
 	        */
 	        $this->sub_module = array();
-		//	$this->sub_module[] = ['label'=>'ملاحظات و استفسارات','path'=>'notes',
-		//	'parent_columns'=>'name','foreign_key'=>'tasks_id','button_color'=>'success',
-		//	'button_icon'=>'fa fa-sticky-note-o'];
+			$this->sub_module[] = ['label'=>'ملاحظات و استفسارات','path'=>'notes',
+			'parent_columns'=>'name','foreign_key'=>'tasks_id','button_color'=>'success',
+			'button_icon'=>'fa fa-sticky-note-o'];
 
 
 	        /* 
