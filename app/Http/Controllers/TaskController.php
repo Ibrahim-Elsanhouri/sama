@@ -8,7 +8,7 @@ use App\Models\Task;
 class TaskController extends Controller
 {
     //
-    public function done(){
+    public function done($id){
         $task = Task::find($id); 
         $task->done = 1; 
         $task->save(); 
