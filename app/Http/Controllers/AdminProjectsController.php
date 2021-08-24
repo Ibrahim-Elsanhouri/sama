@@ -34,6 +34,8 @@
 			$this->col[] = ["label"=>"رقم المشروع","name"=>"id"];
 			$this->col[] = ["label"=>"اسم المشروع","name"=>"name"];
 			$this->col[] = ["label"=>"نوع المشروع","name"=>"types_id","join"=>"types,name"];
+			$this->col[] = ["label"=>"عنوان المشروع","name"=>"address"];
+
 			$this->col[] = ["label"=>"المبلغ","name"=>"price"];
 			$this->col[] = ["label"=>"رقم المعاملة","name"=>"process_number"];
 			$this->col[] = ["label"=>"العميل","name"=>"users_id","join"=>"users,name"];

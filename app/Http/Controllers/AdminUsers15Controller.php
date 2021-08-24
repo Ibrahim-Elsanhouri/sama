@@ -42,7 +42,7 @@
 			$this->form = [];
 			$this->form[] = ['label'=>'اسم العميل','name'=>'name','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10','placeholder'=>'اسم العميل او الجهة'];
 			$this->form[] = ['label'=>'البريد الالكتروني','name'=>'email','type'=>'email','validation'=>'min:1|max:255|email|unique:users','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'الجوال','name'=>'mobile','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'الجوال','name'=>'mobile','type'=>'text','validation'=>'required|min:10|max:10','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'رقم الهوية - السجل التجاري','name'=>'national','type'=>'text','validation'=>'required|min:1|max:255|unique:users','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'المكتب المسجل','name'=>'offices_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'offices,name'];
 			# END FORM DO NOT REMOVE THIS LINE
