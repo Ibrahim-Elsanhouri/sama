@@ -24,8 +24,8 @@
   <tbody>
     @foreach($tasks  as $task )
       <tr>
-        <td>{{$task->id }}</td>
-        <td>{{$task->from_user->name }}</td>
+        <td>{{ $task->id }}</td>
+        <td>{{ $task->from->user }}</td>
         <td>{{$task->project->address}}</td>
         <td>{{$task->project->name}}</td>
         <td>{{$task->project->user->name}}</td>

@@ -8,13 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Admin extends Model
 {
     use HasFactory;
-    protected $table="cms_users"; 
+    protected $table = 'cms_users';
+    public function projects(){
+        return $this->hasMany(Project::class , 'from'); 
+    }
 
 
-    public function sender(){
-        return $this->hasMany(Task::class , 'from'); 
-    }
-    public function receiver(){
-        return $this->hasMany(Task::class , 'to'); 
-    }
+   
 }
