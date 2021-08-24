@@ -12,9 +12,9 @@ class Task extends Model
         return $this->belongsTo(Project::class , 'projects_id');
     }
     public function from_user(){
-        return $this->belongsTo(User::class , 'from');
+        return $this->belongsTo(Admin::class , 'from');
     }
     public function to_user(){
-        return $this->belongsTo(User::class , 'to');
+        return $this->belongsTo(Admin::class , 'to');
     }
 }
