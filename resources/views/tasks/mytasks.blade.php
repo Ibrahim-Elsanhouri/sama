@@ -7,7 +7,7 @@
       <tr>
         <th>رقم المهمة</th>
         <th>مرسل المهمة</th>
-        <th>عنوان المهمة</th>
+        <th>موقع المشروع</th>
         <th> المشروع  </th>
         <th> العميل  </th>
         <th> جوال العميل  </th>
@@ -26,7 +26,7 @@
       <tr>
         <td>{{$task->id }}</td>
         <td>{{$task->from_user->name }}</td>
-        <td>{{$task->title}}</td>
+        <td>{{$task->project->address}}</td>
         <td>{{$task->project->name}}</td>
         <td>{{$task->project->user->name}}</td>
         <td>{{$task->project->user->mobile}}</td>

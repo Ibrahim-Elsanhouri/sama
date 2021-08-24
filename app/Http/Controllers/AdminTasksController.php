@@ -39,6 +39,7 @@
 			$this->col[] = ["label"=>"مرسلة من","name"=>"from","join"=>"cms_users,name"];
 			$this->col[] = ["label"=>"مرسلة الى","name"=>"to","join"=>"cms_users,name"];
 			$this->col[] = ["label"=>"المهمة","name"=>"works_id","join"=>"works,name"];
+			$this->col[] = ["label"=>"موقع المشروع","name"=>"projects_id","join"=>"projects,address"];
 
 		//	$this->col[] = ["label"=>"موعد التسليم","name"=>"deadline"];
 		    $this->col[] = ["label"=>"تاريخ المهمة","name"=>"created_at"];
@@ -99,8 +100,8 @@
 	        | 
 	        */
 	        $this->addaction = array();
-			$this->addaction[] = ['label'=>'تأكيد التنفيذ','url'=>CRUDBooster::mainpath('set-done/1/[id]'),'icon'=>'fa fa-cloud-download','color'=>'primary','showIf'=>"[done] == '0'"];
-			$this->addaction[] = ['label'=>'تم التنفيذ','url'=>CRUDBooster::mainpath('set-done/1/[id]'),'icon'=>'fa fa-thumbs-up','color'=>'success','showIf'=>"[done] == '1'"];
+			$this->addaction[] = ['label'=>'تأكيد التنفيذ','url'=>CRUDBooster::mainpath('#'),'icon'=>'fa fa-cloud-download','color'=>'primary','showIf'=>"[done] == '0'"];
+			$this->addaction[] = ['label'=>'تم التنفيذ','url'=>CRUDBooster::mainpath('#'),'icon'=>'fa fa-thumbs-up','color'=>'success','showIf'=>"[done] == '1'"];
 
 			$this->addaction[] = ['label'=>'انهاء المهمة','url'=>CRUDBooster::mainpath('set-approved/1/[id]'),'icon'=>'fa fa-check','color'=>'primary','showIf'=>"[approved] == '0'"];
 			$this->addaction[] = ['label'=>'تم الانهاء','url'=>CRUDBooster::mainpath('set-approved/1/[id]'),'icon'=>'fa fa-check-square-o','color'=>'success','showIf'=>"[approved] == '1'"];
@@ -360,21 +361,25 @@
 
 	    //By the way, you can still create your own method in here... :) 
 
-		public function getSetDone($done,$id) {
-			DB::table('tasks')->where('id',$id)->update(['done'=>$done]);
+	//	public function getSetDone($done,$id) {
+	//		DB::table('tasks')->where('id',$id)->update(['done'=>$done]);
 			
 			//This will redirect back and gives a message
-			CRUDBooster::redirect($_SERVER['HTTP_REFERER'],"تم تنفيذ المهمة 👍 ","info");
-		 }
+	//		CRUDBooster::redirect($_SERVER['HTTP_REFERER'],"تم تنفيذ المهمة 👍 ","info");
+//		 }
 
 
 		 public function getSetApproved($approved,$id) {
-			DB::table('tasks')->where('id',$id)->update(['approved'=>$approved ]);
+			if(CRUDBooster::myPrivilegeId() == 2){
+				DB::table('tasks')->where('id',$id)->update(['approved'=>$approved ]);
 			$to = Task::find($id)->to; 
 		
 			//This will redirect back and gives a message
 			$this->validate_finish_task($to); 
-			CRUDBooster::redirect($_SERVER['HTTP_REFERER'],"تم تاكيد  التنفيذ 👍 ","info");
+			CRUDBooster::redirect($_SERVER['HTTP_REFERER'],"تم تاكيد  التنفيذ 👍 ","info");	
+			}
+			CRUDBooster::redirect($_SERVER['HTTP_REFERER'],"ليس لديك صلاحية انهاء مهمة","danger");	
+
 		 }
 		 
 
