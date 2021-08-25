@@ -11,8 +11,8 @@ class Task extends Model
     public function project(){
         return $this->belongsTo(Project::class , 'projects_id');
     }
-    public function from(){
-        return $this->belongsTo('App\Models\Admin', 'from');
+    public function sender(){
+        return $this->belongsTo(Admin::class, 'from');
     }
   // public function to(){
     //    return $this->belongsTo('App\Models\Admin' , 'to');

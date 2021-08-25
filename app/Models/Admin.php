@@ -9,9 +9,9 @@ class Admin extends Model
 {
     use HasFactory;
     protected $table = 'cms_users';
-    public function projects(){
-        return $this->hasMany(Project::class , 'from'); 
-    }
+   // public function projects(){
+     //   return $this->hasMany(Project::class , 'from'); 
+   // }
 
 
    
