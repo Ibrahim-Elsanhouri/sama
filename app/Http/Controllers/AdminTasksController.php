@@ -40,8 +40,8 @@
 			$this->col[] = ["label"=>"مرسلة من","name"=>"from","join"=>"cms_users,name"];
 			$this->col[] = ["label"=>"مرسلة الى","name"=>"to","join"=>"cms_users,name"];
 			$this->col[] = ["label"=>"المهمة","name"=>"works_id","join"=>"works,name"];
-			$this->col[] = ["label"=>"العميل","name"=>"works_id","join"=>"users,name"];
-			$this->col[] = ["label"=>"الجوال","name"=>"works_id","join"=>"users,mobile"];
+			$this->col[] = ["label"=>"العميل","name"=>"users_id","join"=>"users,name"];
+			$this->col[] = ["label"=>"الجوال","name"=>"users_id","join"=>"users,mobile"];
 
 			$this->col[] = ["label"=>"موقع المشروع","name"=>"projects_id","join"=>"projects,address"];
 
