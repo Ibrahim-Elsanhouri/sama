@@ -34,7 +34,7 @@
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
 			$this->col[] = ["label"=>"المبلغ","name"=>"amount"];
-			$this->col[] = ["label"=>"العميل","name"=>"cms_users_id","join"=>"cms_users,name"];
+			$this->col[] = ["label"=>"مسجل الدفعة","name"=>"cms_users_id","join"=>"cms_users,name"];
 			$this->col[] = ["label"=>"المشروع","name"=>"projects_id","join"=>"projects,name"];
 			$this->col[] = ["label"=>"تاريخ السداد","name"=>"payment_date"];
 			# END COLUMNS DO NOT REMOVE THIS LINE

@@ -32,12 +32,14 @@
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
 			$this->col[] = ["label"=>"رقم المشروع","name"=>"id"];
-
 			$this->col[] = ["label"=>"اسم المشروع","name"=>"name"];
 			$this->col[] = ["label"=>"نوع المشروع","name"=>"types_id","join"=>"types,name"];
+			$this->col[] = ["label"=>"عنوان المشروع","name"=>"address"];
+
 			$this->col[] = ["label"=>"المبلغ","name"=>"price"];
 			$this->col[] = ["label"=>"رقم المعاملة","name"=>"process_number"];
 			$this->col[] = ["label"=>"العميل","name"=>"users_id","join"=>"users,name"];
+			$this->col[] = ["label"=>"الجوال","name"=>"users_id","join"=>"users,mobile"];
 			$this->col[] = ["label"=>"حالة المشروع","name"=>"halas_id","join"=>"halas,name"];
 
 			# END COLUMNS DO NOT REMOVE THIS LINE

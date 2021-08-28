@@ -6,6 +6,7 @@
 	use CRUDBooster;
 	use Carbon\Carbon;
 	use App\Models\Task; 
+	use App\Models\Project; 
 	use App\Traits\Notification; 
 
 	class AdminTasksController extends \crocodicstudio\crudbooster\controllers\CBController {
@@ -39,6 +40,9 @@
 			$this->col[] = ["label"=>"مرسلة من","name"=>"from","join"=>"cms_users,name"];
 			$this->col[] = ["label"=>"مرسلة الى","name"=>"to","join"=>"cms_users,name"];
 			$this->col[] = ["label"=>"المهمة","name"=>"works_id","join"=>"works,name"];
+			$this->col[] = ["label"=>"العميل","name"=>"works_id","join"=>"users,name"];
+			$this->col[] = ["label"=>"الجوال","name"=>"works_id","join"=>"users,mobile"];
+
 			$this->col[] = ["label"=>"موقع المشروع","name"=>"projects_id","join"=>"projects,address"];
 
 		//	$this->col[] = ["label"=>"موعد التسليم","name"=>"deadline"];
@@ -285,6 +289,7 @@
 	    public function hook_before_add(&$postdata) {        
 	        //Your code here
 			$postdata['from'] = CRUDBooster::myId();
+			$postdata['users_id'] = Project::find($postdata['projects_id'])->user->id; 
 
 
 	    }
