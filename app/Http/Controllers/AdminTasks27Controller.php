@@ -376,7 +376,21 @@
 		  }
 		  
 
-
+		  public function getDetail($id) {
+			//Create an Auth
+			if(!CRUDBooster::isRead() && $this->global_privilege==FALSE || $this->button_edit==FALSE) {    
+			  CRUDBooster::redirect(CRUDBooster::adminPath(),trans("crudbooster.denied_access"));
+			}
+			
+			$data = [];
+			$data['page_title'] = 'Detail Data';
+//			$data['row'] = DB::table('products')->where('id',$id)->first();
+$task = Task::find($id);
+return view('tasks.details' , compact('task', 'data'));
+			
+			//Please use view method instead view method from laravel
+	//		return $this->view('custom_detail_view',$data);
+		  }
 
 
 	}

@@ -15,6 +15,9 @@ class Project extends Model
     public function payments(){
         return $this->hasMany(Payment::class , 'projects_id'); 
     }
+    public function attachments(){
+        return $this->hasMany(Attachment::class , 'projects_id'); 
+    }
     public function tasks(){
         return $this->hasMany(Task::class , 'projects_id'); 
     }
@@ -23,11 +26,11 @@ class Project extends Model
 
     }
     public function type(){
-        return $this->belongsTo(Type::class, 'users_id'); 
+        return $this->belongsTo(Type::class, 'types_id'); 
 
     }
     public function hala(){
-        return $this->belongsTo(Hala::class, 'users_id'); 
+        return $this->belongsTo(Hala::class, 'halas_id'); 
 
     }
 }

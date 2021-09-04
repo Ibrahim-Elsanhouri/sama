@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Attachment extends Model
 {
     use HasFactory;
+    public function project(){
+        return $this->belongsTo(Project::class , 'projects_id');
+    }
 }

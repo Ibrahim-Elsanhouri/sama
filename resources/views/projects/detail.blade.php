@@ -47,11 +47,26 @@
             <p>{{$project->user->office->name}}</p>
           </div>
           <div class='form-group'>
-            <label>تاريخ اضافة المسروع</label>
+            <label>تاريخ اضافة المشروع </label>
             <p>{{$project->created_at}}</p>
           </div>
 
-         
+          <div class='form-group'>
+            <label> مرفقات المشروع </label>
+            @if ($project->attachments == NULL)
+<p>لا يوجد مرفقات للمشروع📑 </p>
+            @else
+          @foreach($project->attachments as $attachment)
+          
+    
+    <a href="/{{ $attachment->file}}" class="btn btn-primary" target="_blank">{{$attachment->name}} {{ $attachment->file}}</a>
+      @endforeach
+      @endif
+
+          </div>
+
+
+
         <!-- etc .... -->
         
       </form>

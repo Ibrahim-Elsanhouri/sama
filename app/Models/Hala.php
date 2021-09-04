@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Hala extends Model
 {
     use HasFactory;
+    public function projects(){
+        return $this->hasMany(Project::class , 'halas_id'); 
+    }
 }

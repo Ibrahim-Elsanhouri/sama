@@ -72,7 +72,7 @@
 			//$this->form[] = ['label'=>'موعد التسليم','name'=>'deadline','type'=>'date','validation'=>'required|date','width'=>'col-sm-10'];
 			# OLD END FORM
 
-			
+		
 
 			/* 
 	        | ---------------------------------------------------------------------- 
@@ -109,6 +109,8 @@
 
 			$this->addaction[] = ['label'=>'انهاء المهمة','url'=>CRUDBooster::mainpath('set-approved/1/[id]'),'icon'=>'fa fa-check','color'=>'primary','showIf'=>"[approved] == '0'"];
 			$this->addaction[] = ['label'=>'تم الانهاء','url'=>CRUDBooster::mainpath('set-approved/1/[id]'),'icon'=>'fa fa-check-square-o','color'=>'success','showIf'=>"[approved] == '1'"];
+
+			
 	        /* 
 	        | ---------------------------------------------------------------------- 
 	        | Add More Button Selected
@@ -121,7 +123,8 @@
 	        */
 	        $this->button_selected = array();
 
-	                
+	//		$this->button_selected[] = ['label'=>'Set Active','icon'=>'fa fa-check','name'=>'set_active'];
+
 	        /* 
 	        | ---------------------------------------------------------------------- 
 	        | Add alert message to this module at overheader
@@ -251,10 +254,15 @@
 	    | @button_name = the name of button
 	    |
 	    */
-	    public function actionButtonSelected($id_selected,$button_name) {
-	        //Your code here
-	            
-	    }
+		public function actionButtonSelected($id_selected,$button_name) {
+			//$id_selected is an array of id 
+			//$button_name is a name that you have set at button_selected 
+			
+	//		if($button_name == 'set_active') {
+	//		  DB::table('products')->whereIn('id',$id_selected)->update(['status'=>'active']);
+	//		}
+		  }
+		  
 
 
 	    /*
@@ -362,6 +370,22 @@
 
 	    }
 
+
+		public function getDetail($id) {
+			//Create an Auth
+			if(!CRUDBooster::isRead() && $this->global_privilege==FALSE || $this->button_edit==FALSE) {    
+			  CRUDBooster::redirect(CRUDBooster::adminPath(),trans("crudbooster.denied_access"));
+			}
+			
+			$data = [];
+			$data['page_title'] = 'Detail Data';
+//			$data['row'] = DB::table('products')->where('id',$id)->first();
+$task = Task::find($id);
+return view('tasks.details' , compact('task', 'data'));
+			
+			//Please use view method instead view method from laravel
+	//		return $this->view('custom_detail_view',$data);
+		  }
 
 
 	    //By the way, you can still create your own method in here... :) 
