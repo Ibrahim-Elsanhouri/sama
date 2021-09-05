@@ -14,7 +14,22 @@
             <p>{{$task->project->name}}</p>
           </div>
           <div class='form-group'>
-            <label>لعميل</label>
+            <label>سعر المشروع</label>
+            <p>{{$task->project->price}}</p>
+          </div>
+
+          <div class='form-group'>
+            <label>المدفوعات</label>
+            <p>{{$task->project->payments->sum('amount')}}</p>
+          </div>
+
+          <div class='form-group'>
+            <label>المتبقي</label>
+            <p>{{$task->project->price - $task->project->payments->sum('amount')}}</p>
+          </div>
+
+          <div class='form-group'>
+            <label>العميل</label>
             <p>{{$task->project->user->name }}</p>
           </div>
           <div class='form-group'>
