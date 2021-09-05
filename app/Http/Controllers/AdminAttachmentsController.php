@@ -2,11 +2,10 @@
 
 	use Session;
 	use Request;
-	use App\Models\Project; 
 	use DB;
 	use CRUDBooster;
 
-	class AdminProjectsController extends \crocodicstudio\crudbooster\controllers\CBController {
+	class AdminAttachmentsController extends \crocodicstudio\crudbooster\controllers\CBController {
 
 	    public function cbInit() {
 
@@ -26,43 +25,28 @@
 			$this->button_filter = true;
 			$this->button_import = false;
 			$this->button_export = false;
-			$this->table = "projects";
+			$this->table = "attachments";
 			# END CONFIGURATION DO NOT REMOVE THIS LINE
 
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
-			$this->col[] = ["label"=>"رقم المشروع","name"=>"id"];
-			$this->col[] = ["label"=>"اسم المشروع","name"=>"name"];
-			$this->col[] = ["label"=>"نوع المشروع","name"=>"types_id","join"=>"types,name"];
-			$this->col[] = ["label"=>"عنوان المشروع","name"=>"address"];
-
-			$this->col[] = ["label"=>"المبلغ","name"=>"price"];
-			$this->col[] = ["label"=>"رقم المعاملة","name"=>"process_number"];
-			$this->col[] = ["label"=>"العميل","name"=>"users_id","join"=>"users,name"];
-			$this->col[] = ["label"=>"الجوال","name"=>"users_id","join"=>"users,mobile"];
-			$this->col[] = ["label"=>"حالة المشروع","name"=>"halas_id","join"=>"halas,name"];
-
+			$this->col[] = ["label"=>"المشروع","name"=>"projects_id","join"=>"projects,name"];
+			$this->col[] = ["label"=>"اسم المرفق","name"=>"name"];
+			$this->col[] = ["label"=>"المرفق","name"=>"file"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
-			$this->form[] = ['label'=>'اسم المشروع','name'=>'name','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10','placeholder'=>'فضلا ادخل احرف فقط'];
-			$this->form[] = ['label'=>'نوع المشروع','name'=>'types_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'types,name'];
-			$this->form[] = ['label'=>'موقع المشروع','name'=>'address','type'=>'text','validation'=>'string|min:3|max:70','width'=>'col-sm-10','placeholder'=>'فضلا ادخل احرف فقط'];
-
-			$this->form[] = ['label'=>'المبلغ','name'=>'price','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'الدفعات','name'=>'payment','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'رقم المعاملة','name'=>'process_number','type'=>'text','validation'=>'min:1|max:255','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'العميل','name'=>'users_id','type'=>'select2','validation'=>'required','width'=>'col-sm-9','datatable'=>'users,name'];
+			$this->form[] = ['label'=>'المشروع','name'=>'projects_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'projects,name'];
+			$this->form[] = ['label'=>'اسم المرفق','name'=>'name','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10','placeholder'=>'فضلا ادخل احرف فقط'];
+			$this->form[] = ['label'=>'المرفق','name'=>'file','type'=>'textarea','validation'=>'required|string|min:5|max:5000','width'=>'col-sm-10'];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
 			//$this->form = [];
-			//$this->form[] = ['label'=>'اسم المشروع','name'=>'name','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10','placeholder'=>'فضلا ادخل احرف فقط'];
-			//$this->form[] = ['label'=>'نوع المشروع','name'=>'types_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'types,name'];
-			//$this->form[] = ['label'=>'المبلغ','name'=>'price','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'الدفعات','name'=>'payments','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'رقم المعاملة','name'=>'process_number','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
+			//$this->form[] = ["label"=>"Projects Id","name"=>"projects_id","type"=>"select2","required"=>TRUE,"validation"=>"required|integer|min:0","datatable"=>"projects,name"];
+			//$this->form[] = ["label"=>"Name","name"=>"name","type"=>"text","required"=>TRUE,"validation"=>"required|string|min:3|max:70","placeholder"=>"فضلا ادخل احرف فقط"];
+			//$this->form[] = ["label"=>"File","name"=>"file","type"=>"textarea","required"=>TRUE,"validation"=>"required|string|min:5|max:5000"];
 			# OLD END FORM
 
 			/* 
@@ -77,23 +61,9 @@
 			| @parent_columns = Sparate with comma, e.g : name,created_at
 	        | 
 	        */
-
-/*
-$columns[] = ['label'=>'Price','name'=>'name','type'=>'text'];
-$columns[] = ['label'=>'QTY','name'=>'docs','type'=>'upload'];
-$this->form[] = ['label'=>'مرفقات المشروع','name'=>'attachments',
-'type'=>'child','columns'=>$columns,
-'table'=>'attachments','foreign_key'=>'projects_id'];
-*/ 	      
+	        $this->sub_module = array();
 
 
-$this->sub_module = array();
-$this->sub_module[] = ['label'=>'مهام المشروع','path'=>'tasks','parent_columns'=>'id','foreign_key'=>'projects_id','button_color'=>'info','button_icon'=>'fa fa-book'];
-$this->sub_module[] = ['label'=>'المدفوعات','path'=>'payments','parent_columns'=>'id,price','foreign_key'=>'projects_id','button_color'=>'primary','button_icon'=>'fa fa-money'];
-$this->sub_module[] = ['label'=>'المرفقات','path'=>'attachments','parent_columns'=>'id','foreign_key'=>'projects_id','button_color'=>'success','button_icon'=>'fa fa-book'];
-
-
-//send_done_to_manager
 	        /* 
 	        | ---------------------------------------------------------------------- 
 	        | Add More Action Button / Menu
@@ -166,13 +136,7 @@ $this->sub_module[] = ['label'=>'المرفقات','path'=>'attachments','parent
 	        */
 	        $this->index_statistic = array();
 
-			$this->index_statistic[] = ['label'=>'اجمالي المشاريع','count'=>DB::table('projects')->count(),
-			'icon'=>'fa fa-building','color'=>'success'];
-			$this->index_statistic[] = ['label'=>'المشاريع الجديدة',
-			'count'=>DB::table('projects')->where('halas_id' , 1)->count(),'icon'=>'fa fa-flask','color'=>'danger'];
 
-			$this->index_statistic[] = ['label'=>'اجمالي المبلغ','count'=>DB::table('projects')->sum('price'),
-			'icon'=>'fa fa-money','color'=>'info'];
 
 	        /*
 	        | ---------------------------------------------------------------------- 
@@ -257,7 +221,7 @@ $this->sub_module[] = ['label'=>'المرفقات','path'=>'attachments','parent
 	    */
 	    public function actionButtonSelected($id_selected,$button_name) {
 	        //Your code here
-	
+	            
 	    }
 
 
@@ -360,19 +324,5 @@ $this->sub_module[] = ['label'=>'المرفقات','path'=>'attachments','parent
 
 	    //By the way, you can still create your own method in here... :) 
 
-		public function getDetail($id) {
-			//Create an Auth
-			if(!CRUDBooster::isRead() && $this->global_privilege==FALSE || $this->button_edit==FALSE) {    
-			  CRUDBooster::redirect(CRUDBooster::adminPath(),trans("crudbooster.denied_access"));
-			}
-			
-		$data = [];
-			$data['page_title'] = 'Detail Data';
-	//	$data['row'] = DB::table('products')->where('id',$id)->first();
-    $project = Project::find($id); 
-			
-			//Please use view method instead view method from laravel
-	//		return $this->view('custom_detail_view',$data);
-	return view('projects.detail' , compact('data', 'project'));
-		  }
+
 	}
