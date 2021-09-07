@@ -59,7 +59,7 @@
           @foreach($project->attachments as $attachment)
           
     
-    <a href="/{{ $attachment->file}}" class="btn btn-primary" target="_blank">{{$attachment->name}} {{ $attachment->file}}</a>
+    <a href="{{ $attachment->file}}" class="btn btn-primary" target="_blank">{{$attachment->name}}</a>
       @endforeach
       @endif
 

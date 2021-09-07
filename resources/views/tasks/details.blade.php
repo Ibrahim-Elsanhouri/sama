@@ -60,9 +60,16 @@
 @else
             <p>تم التاكيد 👍</p>
             @endif
+
           </div>
         
+ <div class='form-group'>
+            <label>مرفقات المشروع</label>
+            @foreach ($task->project->attachments as $attachment)
+            <a href="{{ $attachment->file}}" class="btn btn-primary" target="_blank">{{$attachment->name}}</a>
 
+            @endforeach
+          </div>
       
         <!-- etc .... -->
         
