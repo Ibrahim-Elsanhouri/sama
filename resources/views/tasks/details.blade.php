@@ -17,7 +17,14 @@
             <label>سعر المشروع</label>
             <p>{{$task->project->price}}</p>
           </div>
-
+          <div class='form-group'>
+            <label>موقع المشروع</label>
+            <p>{{$task->project->address}}</p>
+          </div>
+          <div class='form-group'>
+            <label>مكتب المشروع</label>
+            <p>{{$task->project->user->office->name }}</p>
+          </div>
           <div class='form-group'>
             <label>المدفوعات</label>
             <p>{{$task->project->payments->sum('amount')}}</p>

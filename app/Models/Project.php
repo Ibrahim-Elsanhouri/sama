@@ -15,6 +15,7 @@ class Project extends Model
     public function payments(){
         return $this->hasMany(Payment::class , 'projects_id'); 
     }
+    
     public function attachments(){
         return $this->hasMany(Attachment::class , 'projects_id'); 
     }
