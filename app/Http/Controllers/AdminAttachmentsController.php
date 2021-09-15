@@ -6,7 +6,7 @@
 	use CRUDBooster;
 
 	class AdminAttachmentsController extends \crocodicstudio\crudbooster\controllers\CBController {
-
+	// AdminAttachmentsController comment some issue
 	    public function cbInit() {
 
 			# START CONFIGURATION DO NOT REMOVE THIS LINE
