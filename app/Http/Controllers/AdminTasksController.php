@@ -109,6 +109,7 @@
 
 			$this->addaction[] = ['label'=>'انهاء المهمة','url'=>CRUDBooster::mainpath('set-approved/1/[id]'),'icon'=>'fa fa-check','color'=>'primary','showIf'=>"[approved] == '0'"];
 			$this->addaction[] = ['label'=>'تم الانهاء','url'=>CRUDBooster::mainpath('set-approved/1/[id]'),'icon'=>'fa fa-check-square-o','color'=>'success','showIf'=>"[approved] == '1'"];
+	        $this->addaction[] = ['label'=>'جديد','url'=>CRUDBooster::mainpath('add'),'icon'=>'fa fa-book','color'=>'info'];
 
 			
 	        /* 
@@ -136,7 +137,6 @@
 	        $this->alert        = array();
 	                
 
-	        
 	        /* 
 	        | ---------------------------------------------------------------------- 
 	        | Add more button to header button 
