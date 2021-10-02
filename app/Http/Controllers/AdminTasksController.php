@@ -109,7 +109,7 @@
 
 			$this->addaction[] = ['label'=>'انهاء المهمة','url'=>CRUDBooster::mainpath('set-approved/1/[id]'),'icon'=>'fa fa-check','color'=>'primary','showIf'=>"[approved] == '0'"];
 			$this->addaction[] = ['label'=>'تم الانهاء','url'=>CRUDBooster::mainpath('set-approved/1/[id]'),'icon'=>'fa fa-check-square-o','color'=>'success','showIf'=>"[approved] == '1'"];
-	        $this->addaction[] = ['label'=>'جديد','url'=>CRUDBooster::mainpath('add'),'icon'=>'fa fa-book','color'=>'info'];
+	        $this->addaction[] = ['label'=>'جديد','url'=>CRUDBooster::mainpath('task-view/[id]'),'icon'=>'fa fa-book','color'=>'info'];
 
 			
 	        /* 
@@ -408,6 +408,16 @@ return view('tasks.details' , compact('task', 'data'));
 			CRUDBooster::redirect($_SERVER['HTTP_REFERER'],"تم تاكيد  التنفيذ 👍 ","info");	
 			}
 			CRUDBooster::redirect($_SERVER['HTTP_REFERER'],"ليس لديك صلاحية انهاء مهمة","danger");	
+
+		 }
+
+		 public function getTaskView($id) {
+//dd($id , Task::find($id)->project->user->id); 
+$task = Task::find($id); 
+			return view('projects.task' , compact('task')); 
+
+			//return dd($id);
+
 
 		 }
 		 

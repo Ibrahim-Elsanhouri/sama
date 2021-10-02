@@ -4,52 +4,72 @@
   <!-- Your html goes here -->
   <div class='panel panel-default'>
     <div class='panel-heading'>تفاصيل المشروع</div>
-    <div class='panel-body'>      
-        <div class='form-group'>
-          <label>المشروع</label>
-          <p>{{$project->name}}</p>
-        </div>
-        <div class='form-group'>
-            <label>السعر </label>
-            <p>{{$project->price}}</p>
-          </div>
-          <div class='form-group'>
-            <label>الدفعات</label>
-            <p>{{$project->payment}}</p>
-          </div>
-          <div class='form-group'>
-            <label>رقم المعاملة</label>
-            <p>{{$project->process_number}}</p>
-          </div>
-          <div class='form-group'>
-            <label>نوع المشروع</label>
-            <p>{{$project->type->name}}</p>
-          </div>
-          <div class='form-group'>
-            <label>حالة المشروع</label>
-            <p>{{$project->hala->name}}</p>
-          </div>
+    <div class='panel-body'>   
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">المشروع</th>
+            <th scope="col">{{$project->name}}</th>
+      
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">السعر</th>
+            <td>{{$project->price}}</td>
+     
+          </tr>
+          <tr>
+            <th scope="row">الدفعات</th>
+            <td>{{$project->payment}}</td>
 
-          <div class='form-group'>
-            <label>موقع المشروع</label>
-            <p>{{$project->address}}</p>
-          </div>
-          <div class='form-group'>
-            <label>العميل</label>
-            <p>{{$project->user->name}}</p>
-          </div>
-          <div class='form-group'>
-            <label>جوال العميل</label>
-            <p>{{$project->user->mobile}}</p>
-          </div>
-          <div class='form-group'>
-            <label>مكتب العميل</label>
-            <p>{{$project->user->office->name}}</p>
-          </div>
-          <div class='form-group'>
-            <label>تاريخ اضافة المشروع </label>
-            <p>{{$project->created_at}}</p>
-          </div>
+          </tr>
+          <tr>
+            <th scope="row">رقم المعاملة</th>
+            <td colspan="2">{{$project->process_number}}</td>
+          </tr>
+
+          <tr>
+            <th scope="row">نوع المشروع</th>
+            <td colspan="2">{{$project->type->name}}</td>
+          </tr>
+          <tr>
+            <th scope="row"> حالة المشروع </th>
+            <td colspan="2">{{$project->hala->name}}</td>
+          </tr>
+          <tr>
+            <th scope="row">موقع المشروع</th>
+            <td colspan="2">{{$project->address}}</td>
+          </tr>
+          <tr>
+            <th scope="row">العميل</th>
+            <td colspan="2">{{$project->user->name}}</td>
+          </tr>
+
+
+
+          <tr>
+            <th scope="row">جوال العميل</th>
+            <td colspan="2">{{$project->user->mobile}}</td>
+          </tr>
+          <tr>
+            <th scope="row">مكتب العميل</th>
+            <td colspan="2">{{$project->user->office->name}}</td>
+          </tr>
+          <tr>
+            <th scope="row">تاريخ اضافة المشروع</th>
+            <td colspan="2">{{$project->created_at}}</td>
+          </tr>
+
+
+
+        </tbody>
+      </table>
+      
+
+
+
+
 
           <div class='form-group'>
             <label> مرفقات المشروع </label>

@@ -91,7 +91,11 @@ $this->sub_module = array();
 $this->sub_module[] = ['label'=>'مهام المشروع','path'=>'tasks','parent_columns'=>'id','foreign_key'=>'projects_id','button_color'=>'info','button_icon'=>'fa fa-book'];
 $this->sub_module[] = ['label'=>'المدفوعات','path'=>'payments','parent_columns'=>'id,price','foreign_key'=>'projects_id','button_color'=>'primary','button_icon'=>'fa fa-money'];
 $this->sub_module[] = ['label'=>'المرفقات','path'=>'attachments','parent_columns'=>'id','foreign_key'=>'projects_id','button_color'=>'success','button_icon'=>'fa fa-book'];
-
+$this->sub_module[] = 
+['label'=>'الملاحظات','path'=>'pnotes',
+'parent_columns'=>'id',
+'foreign_key'=>'projects_id',
+'button_color'=>'success','button_icon'=>'fa fa-book'];
 
 //send_done_to_manager
 	        /* 

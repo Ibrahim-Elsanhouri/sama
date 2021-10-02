@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Task extends Model
 {
     use HasFactory;
+    protected $guarded = [];   
+    public $timestamps = false; 
+
     public function project(){
         return $this->belongsTo(Project::class , 'projects_id');
     }
