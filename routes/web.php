@@ -21,6 +21,10 @@ Route::get('/', function () {
    return view('welcome');
  
 });
+Route::get('/qr', function () {
+   return view('qr');
+ 
+});
 
 
 Route::get('/invoice/{id}',[PaymentController::class, 'show'])->name('invoice');
