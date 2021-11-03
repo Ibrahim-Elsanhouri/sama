@@ -4,6 +4,7 @@
 	use Request;
 	use DB;
 	use CRUDBooster;
+	use App\Models\Project; 
 
 	class AdminProjects24Controller extends \crocodicstudio\crudbooster\controllers\CBController {
 
